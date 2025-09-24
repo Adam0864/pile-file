@@ -30,7 +30,7 @@ class File_LC:
     def est_vide(self):
         return self.sortie==None
 
-    def enfiler(self, x):
+    def ajouter(self, x):
         """ajoute x au sommet de la pile
 
                 Args:
@@ -39,7 +39,7 @@ class File_LC:
         c = Cellule(x, None)
         if self.est_vide():
             self.entrée = c
-            self.sortie = self.entrée
+            self.sortie = c
         else:
             self.entrée.suivante = c
             self.entrée = c
@@ -64,25 +64,23 @@ class TestFile(unittest.TestCase):
     def test_vide(self):
         for N in [0, 1, 2, 5, 10, 100]:
             f = File_LC()
-            f.enfiler(N)
+            f.ajouter(N)
             self.assertTrue(f.est_vide())
 
             if N > 1:
                 f.ajouter(0)
                 self.assertFalse(f.est_vide())
 
-    def test_ajouter_et_pleine(self):
+    def test_ajouter(self):
         for N in [1, 2, 5, 10, 100]:
-            f = File_LC(N)
+            f = File_LC()
             for i in range(N):
-                f.ajouter(0)
-            with self.assertRaises(BaseException):
                 f.ajouter(0)
 
     def test_defiler(self):
         for N in [1, 2, 5, 10, 100]:
             f = File_LC()
-            f.enfiler(N)
+            f.ajouter(N)
             for k in range(N):
                 with self.assertRaises(BaseException):
                     f.defiler()
@@ -95,9 +93,8 @@ class TestFile(unittest.TestCase):
         f = File_LC()
         self.assertTrue(f.est_vide())
         for i in range(5):
-            f.enfiler(i)
+            f.ajouter(i)
             self.assertFalse(f.est_vide())
-        self.assertTrue(f.est_pleine())
         self.assertEqual(f.defiler(), 0)
         self.assertEqual(f.defiler(), 1)
         self.assertEqual(f.defiler(), 2)

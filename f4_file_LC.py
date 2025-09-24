@@ -80,7 +80,7 @@ class TestFile(unittest.TestCase):
     def test_defiler(self):
         f = File_LC()
         for N in [1, 2, 5, 10, 100]:
-            f.ajouter(N)
+
             for k in range(N):
                 for i in range(N):
                     f.ajouter(i)

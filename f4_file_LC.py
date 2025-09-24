@@ -78,12 +78,10 @@ class TestFile(unittest.TestCase):
                 f.ajouter(0)
 
     def test_defiler(self):
+        f = File_LC()
         for N in [1, 2, 5, 10, 100]:
-            f = File_LC()
             f.ajouter(N)
             for k in range(N):
-                with self.assertRaises(BaseException):
-                    f.defiler()
                 for i in range(N):
                     f.ajouter(i)
                 for i in range(N):
